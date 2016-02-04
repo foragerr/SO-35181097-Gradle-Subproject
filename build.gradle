@@ -1,0 +1,15 @@
+apply plugin: 'cpp'
+
+println rootDir
+ext.libFolder = rootDir.getCanonicalPath() + '/lib/'
+
+subprojects {
+    afterEvaluate{
+        build.doLast {
+			copy { 
+				from fileTree( buildDir.getCanonicalPath()).files
+				into rootProject.ext.libFolder
+			}
+        }
+    }
+}
